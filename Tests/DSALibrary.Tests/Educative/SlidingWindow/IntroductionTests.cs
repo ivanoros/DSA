@@ -1,4 +1,4 @@
-﻿using DSALib.Educative.SlidingWindow;
+﻿using DSALibrary.Educative.SlidingWindow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DSALibrary.Tests.Educative.SlidingWindow

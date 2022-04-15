@@ -1,4 +1,4 @@
-﻿namespace DSALib.Educative.SlidingWindow
+﻿namespace DSALibrary.Educative.SlidingWindow
 {
     //  https://www.youtube.com/watch?v=MK-NZ4hN7rs
 

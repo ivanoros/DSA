@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DSALibrary\DSALibrary.csproj" />
+    <ProjectReference Include="..\..\DSALibrary\DSALibrary.csproj" />
   </ItemGroup>
 
 </Project>
