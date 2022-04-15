@@ -36,5 +36,27 @@
             }
             return maxSum;
         }
+
+        public int FindBruteForce(int[] arrItems, int k)
+        {
+            //  Time Complexity #
+            //  The time complexity of the above algorithm will be O(N * k).
+
+            //  Space Complexity #
+            //  The algorithm runs in constant space O(1).
+
+            var maxSum = int.MinValue;
+
+            for (int i = 0; i < arrItems.Length - k; i++)
+            {
+                var windowSum = 0;
+                for (int j = i; j < i + k; j++)
+                {
+                    windowSum += arrItems[j];
+                }
+                maxSum = Math.Max(windowSum, maxSum);
+            }
+            return maxSum;
+        }
     }
 }
