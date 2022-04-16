@@ -63,11 +63,7 @@
             for (int windowEnd = 0; windowEnd < str.Length; windowEnd++)
             {
                 var rightChar = str[windowEnd];
-                if (!chars.Contains(rightChar))
-                {
-                    chars.Add(rightChar);
-                }
-                else
+                if (chars.Contains(rightChar))
                 {
                     while (chars.Contains(rightChar))
                     {
@@ -75,6 +71,7 @@
                         chars.Remove(leftChar);
                     }
                 }
+                chars.Add(rightChar);
                 longest = Math.Max(longest, windowEnd - windowStart + 1);
             }
             return longest;
