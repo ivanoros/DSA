@@ -28,7 +28,7 @@
             var windowStart = 0;
             var charFrequency = new Dictionary<char, int>();
             var maxLength = 0;
-            var maxRepeatLetterCount = 0;
+            var maxWindowRepeatLetterCount = 0;
 
             for (int windowEnd = 0; windowEnd < input.Length; windowEnd++)
             {
@@ -37,7 +37,7 @@
                     charFrequency[rightChar] = 0;
 
                 charFrequency[rightChar]++;
-                maxRepeatLetterCount = Math.Max(maxRepeatLetterCount, charFrequency[rightChar]);
+                maxWindowRepeatLetterCount = Math.Max(maxWindowRepeatLetterCount, charFrequency[rightChar]);
 
                 //  Current Window Size is from windowStart to windowEnd,
                 //  overall we have a letter which is repeating 'maxRepeatLetterCount' times,
@@ -45,7 +45,7 @@
                 //  repeating 'maxRepeatLetterCount' times and the remaining letters we should replace.
                 //  If the remaining letters are more than 'K', it is time to shrink the window
                 //  as we are not allowed to replace more than 'K' letters
-                if (windowEnd - windowStart + 1 - maxRepeatLetterCount > K)
+                if (windowEnd - windowStart + 1 - maxWindowRepeatLetterCount > K)
                 {
                     var leftChar = input[windowStart];
                     charFrequency[leftChar]--;
