@@ -1,0 +1,221 @@
+﻿https://www.algorithmsandme.com/sliding-window-problems-and-pattern/
+
+How to identify a sliding window problem?
+
+The first hint is in the problem statement, usually, a sliding window problem asks us to find a subarray or a substring. 
+It means the elements are contiguous, and substring/subarray can be the window we are looking for. 
+So, the idea is to think of a sliding window pattern whenever you hear find a subarray or substring in a given array.
+The second hint confirms that the problem is actually to be solved using a sliding window pattern. 
+In the problem, you would be asked to find a substring or subarray with a certain property, 
+for example, find the longest substring with nonrepeating characters.
+
+To summarize, if you are asked to find subarray or substring with a specific property (longest/shortest/whatever), 
+think of sliding window pattern.
+
+There are two kinds of problems, 
+first one has a fixed-length window, for example, find the maximum in a window of K in an array; 
+second are the problems where a window is variable-sized. 
+Problems in the second category are difficult and commonly asked in the interview.
+
+A window has two ends, let’s call them left and right. 
+The window is between these two ends. 
+If the window has a variable size, then the window will expand and shrink.
+
+Always expand the window from the right end and shrink from the left end
+
+When you are solving the problem, initialize left and right as 0, 
+then expand the window by increasing the right.
+
+When do we shrink the window or expanding the window? 
+Keep expanding the window until it violates the condition stated in the problem statement. 
+As soon as the violation happens, expansion stops, 
+bookkeeping is done if needed like update the longest variable, etc. 
+We start removing elements from the window from left end until the condition is satisfied again.
+
+Stop when right reaches at the end of the original string. The general pattern of solutions is as follows:
+
+public class SlidingWindowProblems {
+     
+    public int solve(String s){
+         
+        //  * Step 1. Initialize the window of zero size, i.e left and right as 0
+        int left = 0;
+        int right = 0;
+         
+        int longest = 0;
+         
+        //  * Step 2 : Go on all till right reaches end
+        while(right < s.length()) {
+             
+            //  * Step 3: Do some bookkeeping to update the state of the window.
+ 
+            //  * Step 4: Expand the window
+            right++;
+ 
+            //  * Step 5: go on till condition is not valid
+            while (left < right /* and Condition is invalid */) {
+                 
+                //  * Step 6: Do the book keeping to keep track of optimization requirements
+                longest = Math.max(right - left, longest);
+                 
+                //  * Step 7: Update the condition.
+                //  * Step 8: remove the left most element from the window.
+                left++;
+            }
+        }
+         
+        return longest;
+    }
+}
+
+With this template code, you have to figure out one thing: 
+How would you maintain the state of the window so that we can quickly check if it is valid or not. 
+It varies from problem to problem.
+Do not sweat too much about it initially, 
+go with the first thing which can work and then later, optimize it.
+
+Longest substring without repeating character
+
+This problem is available on leetcode as Longest Substring Without Repeating Characters, 
+try it with template provided before going to the solution given below.
+
+Given a string, find the length of the longest substring without repeating characters.
+
+For example, abcabcbb longest string with no repeating characters is abc with length 3.
+
+Hint 1, we are looking for a substring, 
+and Hint 2, we are looking for a substring with a specific property (without a repeating character), 
+it means we can use the sliding window approach to solve this problem. 
+In our template, it is important to known when the condition is invalid. 
+To know that a character is repeated, we can use a hashmap, 
+however, a better solution would be a set of character already in the window. 
+Why? Because we do not care about value in the hashmap anyways, 
+all we want to know that a character exists in hashmap, 
+which can be done using set as well without using additional memory for values.
+
+How can we know that condition is invalid? 
+If the new character which comes in the window is already present in the set, 
+then our window violates the no repeating character condition. 
+In that case, we will start removing characters from the left end 
+till a new character can be added to the window. 
+Also, do the bookkeeping to keep track of the longest.
+
+import java.util.HashSet;
+import java.util.Set;
+ 
+public class SlidingWindowProblems {
+ 
+    public int solve(String s){
+ 
+        //  * Step 1. Initialize the window of zero size, i.e left and right as 0
+        int left = 0;
+        int right = 0;
+ 
+        int longest = 0;
+ 
+        Set<Character> set = new HashSet<>();
+        //  * Step 2 : Go on all till right reaches end
+        while(right < s.length()) {
+ 
+            char c = s.charAt(right);
+            //  * Window already contains the characterwhich we want to add, start shrinkingthe window.
+            if(set.contains(c)){
+                //  * Step 5: go on till condition is not valid
+                while (left < right && set.contains(c)) {
+                    // * Step 6: Do the book keeping to keep track of optimization requirements
+                    longest = Math.max(right - left, longest);
+ 
+                    //  * Step 7 and 8: updated condition remove the left most element from the window,
+                    set.remove(s.charAt(left));
+                    left++;
+                }
+            }
+             
+            //  * Step 3 and 4. Add the right character to the set
+            set.add(c);
+            right++;
+        }
+ 
+        return Math.max(right-left, longest);
+    }
+}
+
+In this solution, steps 3 and 4 are at the end because how we do the bookkeeping, 
+if we add the right into the set before checking if already exists, 
+it will fail as a set only stores unique elements.
+
+Longest Substring with At Most 2 Distinct Characters
+
+This problem is asked in Google interview and the problem statement goes like
+
+Given a string, find the longest substring that contains only two unique characters.
+
+For example, given a string abcbbbbcccbdddadacb, 
+the longest substring that contains 2 unique character is bcbbbbcccb.
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+ 
+public class SubstringWith2DistinctCharacters {
+ 
+    public int solve(String s){
+ 
+        /* Step 1. Initialize the window of
+           zero size, i.e left and right as 0
+         */
+        int left = 0;
+        int right = 0;
+ 
+        int longest = 0;
+ 
+        Map<Character, Integer> map = new HashMap<>();
+        int distinct = 0;
+        //Step 2 : Go on all till right reaches end
+        while(right < s.length()) {
+ 
+            /* Step 3: Do some bookkeeping to update
+               the state of the window.
+              */
+            char c = s.charAt(right);
+            if(!map.containsKey(c)){
+                distinct++;
+            }
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            //Step 4: Expand the window
+            right++;
+ 
+            //Step 5: go on till condition is not valid
+            while (left < right && distinct > 2) {
+ 
+                /*Step 6: Do the book keeping to keep
+                track of optimization requirements */
+                longest = Math.max(right - left, longest);
+ 
+                /* Step 7: Update the condition. */
+                map.put(s.charAt(left), map.get(s.charAt(left))-1);
+                 
+                /* We can decrease distinct count only if the character
+                just removed is not any more in window */
+                if(map.get(s.charAt(left)) == 0){
+                    distinct--;
+                }
+                /* Step 8: remove the left most element 
+                    from the window.
+                */
+                left++;
+            }
+        }
+ 
+        return Math.max(right - left, longest);
+    }
+}
+
+This problem is a straight forward case of a sliding window and perfectly fits in our template. 
+All we had to do is to figure out how to quickly validate the state of the window using a map. 
+
+Now, can you solve another similar problem called: 
+Longest Substring with At Most K Distinct Characters 
+or a Subarray with K different elements or 
+Max Consecutive Ones III

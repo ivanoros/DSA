@@ -1,7 +1,7 @@
-﻿using DSALibrary.Educative.SlidingWindow;
+﻿using CodingPatternsLibrary.SlidingWindow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DSALibrary.Tests.Educative.SlidingWindow
+namespace CodingPatternsLibrary.Tests.SlidingWindow
 {
     [TestClass]
     public class LongestSubstringWithSameLettersAfterReplacementTests

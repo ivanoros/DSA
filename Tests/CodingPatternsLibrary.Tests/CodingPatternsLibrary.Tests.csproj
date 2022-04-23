@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DSALibrary\DSALibrary.csproj" />
+    <ProjectReference Include="..\..\CodingPatternsLibrary\CodingPatternsLibrary.csproj" />
   </ItemGroup>
-
 </Project>

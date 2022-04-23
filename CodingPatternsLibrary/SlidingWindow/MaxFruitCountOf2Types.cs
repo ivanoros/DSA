@@ -1,4 +1,4 @@
-﻿namespace DSALibrary.Educative.SlidingWindow
+﻿namespace CodingPatternsLibrary.SlidingWindow
 {
     //  Given an array of characters where each character represents a fruit tree, you are given
     //  two baskets and your goal is to put maximum number of fruits in each basket.

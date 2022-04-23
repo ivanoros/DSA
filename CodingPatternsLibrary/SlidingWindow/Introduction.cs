@@ -1,6 +1,7 @@
-﻿namespace DSALibrary.Educative.SlidingWindow
+﻿namespace CodingPatternsLibrary.SlidingWindow
 {
     //  https://www.youtube.com/watch?v=MK-NZ4hN7rs
+    //  https://medium.com/outco/how-to-solve-sliding-window-problems-28d67601a66
 
     //  In general, any problem where the author is asking for any of the following return values can use a sliding window:
     //  1. Minimum value

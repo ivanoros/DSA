@@ -1,4 +1,4 @@
-﻿namespace DSALibrary.Educative.SlidingWindow
+﻿namespace CodingPatternsLibrary.SlidingWindow
 {
     //  Given a string, find the length of the longest substring which has no repeating characters.
 
