@@ -14,6 +14,17 @@
         //​ O(N) time | O(1) space
         public int FindMaxSumSubArray(int[] arrItems, int k)
         {
+            //  If you observe closely, you will realize that to calculate the sum of a contiguous subarray
+            //  we can utilize the sum of the previous subarray. For this, consider each subarray as a Sliding Window of size ‘k’.
+            //  To calculate the sum of the next subarray, we need to slide the window ahead by one element.
+            //  So to slide the window forward and calculate the sum of the new position of the sliding window, we need to do two things:
+
+            //  1. Subtract the element going out of the sliding window i.e., subtract the first element of the window.
+            //  2. Add the new element getting included in the sliding window i.e., the element coming right after the end of the window.
+
+            //  This approach will save us from re - calculating the sum of the overlapping part of the sliding window.
+            //  Here is what our algorithm will look like:
+
             //  Time Complexity #
             //  The time complexity of the above algorithm will be O(N).
 
@@ -26,12 +37,13 @@
 
             for (int windowEnd = 0; windowEnd < arrItems.Length; windowEnd++)
             {
-                windowSum += arrItems[windowEnd];
-                maxSum = Math.Max(windowSum, maxSum);
+                windowSum += arrItems[windowEnd];           // Add the nexty element
+                // Slide the window, we don't need to slide if we've not hit the required size of 'K'
                 if (windowEnd >= k - 1)
                 {
-                    windowSum -= arrItems[windowStart];
-                    windowStart++;
+                    maxSum = Math.Max(windowSum, maxSum);
+                    windowSum -= arrItems[windowStart];     // Subtract the elemnt going out
+                    windowStart++;                          // Slide the window ahead
                 }
             }
             return maxSum;

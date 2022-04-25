@@ -9,6 +9,9 @@ namespace CodingPatternsLibrary.Tests.SlidingWindow
         [TestMethod]
         [DataRow("ADOBECODEBANC", "ABC", "BANC")]
         [DataRow("BBBBBBABBCBBB", "ABC", "ABBC")]
+        [DataRow("donutsandwafflemakemehungry", "flea", "affle")]
+        [DataRow("whoopiepiesmakemyscalegroan", "roam", "myscalegro")]
+        [DataRow("coffeeteabiscuits", "cake", "")]
         public void FindMinimumWindowSubstringTest(string input, string substring, string expected)
         {
             var sut = new MinimumWindowSubstring();

@@ -34,6 +34,10 @@
             // from going through the whole subarray to find the sum and, as a result,
             // the algorithm complexity will reduce to O(N).
 
+            // In some problems, the size of the sliding window is not fixed. We have to expand or shrink the window
+            // based on the problem constraints. We will see a few examples of such problems in the next chapters.
+
+
             int windowStart = 0;
             int windowSum = 0;
             double[] averageOfContiguousSubArrays = new double[arrItems.Length - K + 1];

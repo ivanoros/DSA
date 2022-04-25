@@ -31,6 +31,11 @@
         //​ O(N) time | O(1) space
         public int FindMaxFruitCount(char[] fruits)
         {
+            //  This problem follows the Sliding Window pattern and is quite similar to Longest Substring with K Distinct Characters.
+            //  In this problem, we need to find the length of the longest subarray with no more than two distinct characters (or fruit types!).
+            //  This transforms the current problem into Longest Substring with K Distinct Characters where K=2.
+
+
             //  Time Complexity #
             //  The time complexity of the above algorithm will be O(N) where ‘N’ is the number of characters in the input array.
             //  The outer for loop runs for all characters and the inner while loop processes each character only once,

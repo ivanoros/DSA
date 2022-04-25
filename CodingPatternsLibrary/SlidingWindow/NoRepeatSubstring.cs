@@ -18,6 +18,11 @@
         //​ O(N) time | O(1) space
         public int FindNoRepeatSubstring(string input)
         {
+            //  This problem follows the Sliding Window pattern and we can use a similar dynamic sliding window strategy
+            //  as discussed in Longest Substring with K Distinct Characters.
+            //  We can use a HashMap to remember the last index of each character we have processed.
+            //  Whenever we get a repeating character we will shrink our sliding window to ensure that we always have distinct characters in the sliding window.
+
             //  Time Complexity #
             //  The time complexity of the above algorithm will be O(N) where ‘N’ is the number of characters in the input string.
 

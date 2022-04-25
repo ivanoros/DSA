@@ -8,7 +8,7 @@
             var lettersNeeded = new Dictionary<char, int>();
             var lettersSean = new Dictionary<char, int>();
             var lettersMissing = 0;
-            var result = (windowStart: 0, windowEnd: input.Length);
+            var result = (windowStart: 0, windowEnd: int.MaxValue);
             foreach (var ch in substring)
             {
                 if (!lettersNeeded.ContainsKey(ch))
@@ -54,7 +54,10 @@
                 }
             }
 
-            return input.Substring(result.windowStart, result.windowEnd - result.windowStart + 1);
+            if (result.windowEnd == int.MaxValue)
+                return string.Empty;
+            else
+                return input.Substring(result.windowStart, result.windowEnd - result.windowStart + 1);
         }
     }
 }
