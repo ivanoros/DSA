@@ -20,7 +20,7 @@
         {
             //  Since the given array is sorted, a brute-force solution could be to iterate through the array,
             //  taking one number at a time and searching for the second number through Binary Search.
-            //  The time complexity of this algorithm will be O(N * logN)O(N∗logN).Can we do better than this ?
+            //  The time complexity of this algorithm will be O(N * logN).Can we do better than this ?
 
             //  We can follow the Two Pointers approach.
             //  We will start with one pointer pointing to the beginning of the array and another pointing at the end.
