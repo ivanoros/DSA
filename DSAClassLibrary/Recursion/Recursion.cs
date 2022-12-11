@@ -1,4 +1,6 @@
-﻿namespace DSAClassLibrary.Recursion
+﻿using System.Security;
+
+namespace DSAClassLibrary.Recursion
 {
     // Every Recursive function can be converted as a Lopp
     // And vice versa evry Loop can be converted as a Recursive function
@@ -142,7 +144,7 @@
             }
         }
 
-        public int SumOfNaturalNumbersLoop(int n)
+        public int SumOfNaturalNumbersIterative(int n)
         {
             var sum = 0;
             for(int i = 1; i <= n; i++)
@@ -158,5 +160,171 @@
             return n * (n + 1) / 2;
         }
         #endregion Sum Of N Natural Numbers
+
+        #region Factorial
+        public int Factorial(int n)
+        {
+            if(n == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return Factorial(n - 1) * n;
+            }
+        }
+
+        public int FactorialIterative(int n)
+        {
+            var factorial = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                factorial = factorial * i;
+            }
+
+            return factorial;
+        }
+        #endregion Factorial
+
+        #region Exponent
+        public int Power(int m, int n)
+        {
+            if (n > 0)
+            {
+                return Power(m, n - 1) * m;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
+        public int PowerEnhanced(int m, int n)
+        {
+            if (n > 0)
+            {
+                if(n % 2 == 0)
+                {
+                    return PowerEnhanced(m * m, n / 2);
+                }
+                else
+                {
+                    return PowerEnhanced(m * m, (n - 1)/2) * m;
+                }
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        #endregion Exponent
+
+        #region Fibonacci Series
+        // 0 1 2 3 4 5 6 7
+        // 0 1 1 2 3 5 8 13
+        public int Fibonacci(int n)
+        {
+            if(n <= 1 )
+            {
+                return n;
+            }
+            else
+            {
+                return Fibonacci(n - 2) + Fibonacci(n - 1);
+            }
+        }
+
+        public int FibonacciIterative(int n)
+        {
+            if (n <= 1)
+                return n;
+
+            int sum = 0, previous = 0, current = 1;
+            for(int i = 2; i <= n; i++)
+            {
+                sum = previous + current;
+                previous = current;
+                current = sum;
+            }
+            return sum;
+        }
+
+        private Dictionary<int, int> _fibValues = new Dictionary<int, int>();
+
+        // Recursion that is being called multiple times is called Excessive Recursion
+        // Memoisation is storing the results
+        public int FibonacciCached(int n)
+        {
+            if (n <= 1)
+            {
+                _fibValues[n] = n;
+                return n;
+            }
+            else
+            {
+                if (!_fibValues.TryGetValue(n - 2, out int fibValue2))
+                {
+                    _fibValues[n - 2] = FibonacciCached(n - 2);
+                }
+                if (!_fibValues.TryGetValue(n - 1, out int fibValue1))
+                {
+                    _fibValues[n - 1] = FibonacciCached(n - 1);
+                }
+
+                _fibValues[n] = _fibValues[n - 2] + _fibValues[n - 1];
+
+                return _fibValues[n - 2] + _fibValues[n - 1];
+
+                //if (_fibValues.TryGetValue(n, out int fibValue))
+                //{
+                //    return fibValue;
+                //}
+                //else
+                //{
+                //    fibValue = FibonacciCached(n - 2) + FibonacciCached(n - 1);
+                //    _fibValues[n] = fibValue;
+                //    return fibValue;
+                //}
+            }
+        }
+        #endregion Fibonacci Series
+
+        #region Combination Formula
+        // Permutation Formula
+        // nCr = n!/(r!(n-r)!)
+
+        public int CombinationFormula(int n, int r)
+        {
+            int t1, t2, t3;
+            t1 = Factorial(n);
+            t2 = Factorial(r);
+            t3 = Factorial(n - r);
+            return t1 / (t2 * t3);
+        }
+
+        public int NCR(int n, int r)
+        {
+            if(r==0 || n == r)
+            {
+                return 1;
+            }
+            else
+            {
+                return NCR(n - 1, r - 1) + NCR(n - 1, r);
+            }
+        }
+        #endregion Combination Formula
+
+        #region Tower of Hanoi
+        public void TowerOfHanoi(int n, int A, int B, int C)
+        {
+            if(n > 0)
+            {
+                TowerOfHanoi(n - 1, A, C, B);
+                Console.WriteLine($"Move from ({A} --> {C})");
+                TowerOfHanoi(n - 1, B, A, C);
+            }
+        }
+        #endregion Tower of Hanoi
     }
 }
