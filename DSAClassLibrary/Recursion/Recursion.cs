@@ -1,6 +1,4 @@
-﻿using System.Security;
-
-namespace DSAClassLibrary.Recursion
+﻿namespace DSAClassLibrary.Recursion
 {
     // Every Recursive function can be converted as a Lopp
     // And vice versa evry Loop can be converted as a Recursive function
@@ -12,7 +10,7 @@ namespace DSAClassLibrary.Recursion
         // Space --> O(n)
         public void TailRecursion(int n)
         {
-            if(n > 0)
+            if (n > 0)
             {
                 Console.WriteLine(n);
                 TailRecursion(n - 1);
@@ -25,7 +23,7 @@ namespace DSAClassLibrary.Recursion
         // Space is Order of One instead of Order of N
         public void LoopTailRecursion(int n)
         {
-            while(n > 0)
+            while (n > 0)
             {
                 Console.WriteLine(n);
                 n = n - 1;
@@ -63,7 +61,7 @@ namespace DSAClassLibrary.Recursion
 
         public void TreeRecursion(int n)
         {
-            if(n > 0)
+            if (n > 0)
             {
                 Console.WriteLine(n);
                 TreeRecursion(n - 1);
@@ -77,7 +75,7 @@ namespace DSAClassLibrary.Recursion
 
         public void FunctionA(int n)
         {
-            if(n > 0)
+            if (n > 0)
             {
                 Console.WriteLine(n);
                 FunctionB(n - 1);
@@ -86,7 +84,7 @@ namespace DSAClassLibrary.Recursion
 
         public void FunctionB(int n)
         {
-            if(n > 1)
+            if (n > 1)
             {
                 Console.WriteLine(n); ;
                 FunctionA(n / 2);
@@ -111,7 +109,7 @@ namespace DSAClassLibrary.Recursion
         private static int x = 0;
         public int RecursionWithStaticVariable(int n)
         {
-            if(n > 0)
+            if (n > 0)
             {
                 x++;
                 return RecursionWithStaticVariable(n - 1) + x;
@@ -134,7 +132,7 @@ namespace DSAClassLibrary.Recursion
         #region Sum Of N Natural Numbers
         public int SumOfNaturalNumbers(int n)
         {
-            if(n == 0)
+            if (n == 0)
             {
                 return 0;
             }
@@ -147,7 +145,7 @@ namespace DSAClassLibrary.Recursion
         public int SumOfNaturalNumbersIterative(int n)
         {
             var sum = 0;
-            for(int i = 1; i <= n; i++)
+            for (int i = 1; i <= n; i++)
             {
                 sum = sum + n;
             }
@@ -164,7 +162,7 @@ namespace DSAClassLibrary.Recursion
         #region Factorial
         public int Factorial(int n)
         {
-            if(n == 0)
+            if (n == 0)
             {
                 return 1;
             }
@@ -203,13 +201,13 @@ namespace DSAClassLibrary.Recursion
         {
             if (n > 0)
             {
-                if(n % 2 == 0)
+                if (n % 2 == 0)
                 {
                     return PowerEnhanced(m * m, n / 2);
                 }
                 else
                 {
-                    return PowerEnhanced(m * m, (n - 1)/2) * m;
+                    return PowerEnhanced(m * m, (n - 1) / 2) * m;
                 }
             }
             else
@@ -224,7 +222,7 @@ namespace DSAClassLibrary.Recursion
         // 0 1 1 2 3 5 8 13
         public int Fibonacci(int n)
         {
-            if(n <= 1 )
+            if (n <= 1)
             {
                 return n;
             }
@@ -240,7 +238,7 @@ namespace DSAClassLibrary.Recursion
                 return n;
 
             int sum = 0, previous = 0, current = 1;
-            for(int i = 2; i <= n; i++)
+            for (int i = 2; i <= n; i++)
             {
                 sum = previous + current;
                 previous = current;
@@ -304,7 +302,7 @@ namespace DSAClassLibrary.Recursion
 
         public int NCR(int n, int r)
         {
-            if(r==0 || n == r)
+            if (r == 0 || n == r)
             {
                 return 1;
             }
@@ -318,7 +316,7 @@ namespace DSAClassLibrary.Recursion
         #region Tower of Hanoi
         public void TowerOfHanoi(int n, int A, int B, int C)
         {
-            if(n > 0)
+            if (n > 0)
             {
                 TowerOfHanoi(n - 1, A, C, B);
                 Console.WriteLine($"Move from ({A} --> {C})");
