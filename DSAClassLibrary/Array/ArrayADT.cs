@@ -317,7 +317,6 @@ namespace DSAClassLibrary.Array
                 }
             }
         }
-
         public void ArrangeNegativeOnLeftSide(int[] array)
         {
             int left = 0, right = array.Length - 1;
@@ -333,5 +332,27 @@ namespace DSAClassLibrary.Array
                 }
             }
         }
+
+        public int[] Merge(int[] first, int[] second)
+        {
+            // Merging can only be done on sorted arrays
+            var merged = new int[first.Length + second.Length - 2];
+            int i = 0, j = 0, z = 0;
+
+            if (first[i] < second[j])
+            {
+                merged[z++] = first[i++];
+            }
+            else
+            {
+                merged[z++] = second[j++];
+            }
+
+            return merged;
+        }
+        // Append
+        // Concat
+        // Compare
+        // Copy
     }
 }
