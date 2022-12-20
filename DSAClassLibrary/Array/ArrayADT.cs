@@ -48,7 +48,7 @@ namespace DSAClassLibrary.Array
             array[x] = array[y];
             array[y] = temp;
         }
-        public int Search(int[] array, int x)
+        public int LinearSearch(int[] array, int x)
         {
             for(int i = 0; i < array.Length; i++)
             {
@@ -336,16 +336,30 @@ namespace DSAClassLibrary.Array
         public int[] Merge(int[] first, int[] second)
         {
             // Merging can only be done on sorted arrays
-            var merged = new int[first.Length + second.Length - 2];
+            var merged = new int[first.Length + second.Length];
             int i = 0, j = 0, z = 0;
 
-            if (first[i] < second[j])
+            while(i < first.Length && j < second.Length)
             {
-                merged[z++] = first[i++];
+                if (first[i] < second[j])
+                {
+                    merged[z++] = first[i++];
+                }
+                else
+                {
+                    merged[z++] = second[j++];
+                }
+
             }
-            else
+
+            for(; i < first.Length; i++)
             {
-                merged[z++] = second[j++];
+                merged[z++] = first[i];
+            }
+
+            for(; j < second.Length; j++)
+            {
+                merged[z++] = second[j];
             }
 
             return merged;
@@ -354,5 +368,286 @@ namespace DSAClassLibrary.Array
         // Concat
         // Compare
         // Copy
+
+        // Set Operations
+
+        // O(n2) Time Complexety 
+        public int[] Union(int[] first, int[] second)
+        {
+            // Duplicate are selected only once
+            var union = new int[first.Length + second.Length - 2];
+            int k = 0;
+            for (int i = 0; i < first.Length; i++)
+            {
+                union[k++] = first[i];
+            }
+            for (int j = 0; j < second.Length; j++)
+            {
+                var isDuplicate = false;
+                for (int i = 0; i < first.Length; i++)
+                {
+                    if (first[i] == second[j])
+                    {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if(!isDuplicate)
+                {
+                    union[k++] = second[j];
+                }
+            }
+            return union;
+        }
+
+        // O(n) Time Complexety
+        public int[] UnionOnSorted(int[] first, int[] second)
+        {
+            // Duplicate are selected only once
+            var union = new int[first.Length + second.Length - 2];
+            int i = 0, j = 0, k = 0;
+
+            while(i < first.Length && j < second.Length)
+            {
+                if (first[i] == second[j])
+                {
+                    union[k++] = first[i];
+                    i++;
+                    j++;
+                }
+                else if (first[i] < second[j])
+                {
+                    union[k++] = first[i];
+                    i++;
+                }
+                else
+                {
+                    union[k++] = second[j];
+                    j++;
+                }
+            }
+
+            for(; i < first.Length; i++)
+            {
+                union[k++] = first[i];
+            }
+
+            for(; j < second.Length; j++)
+            {
+                union[k++] = second[j];
+            }
+            return union;
+        }
+
+        // O(n2) Time Complexety
+        public int[] Intersection(int[] first, int[] second)
+        {
+            // Common elemnts of both sets
+            //var intersection = new int[first.Length + second.Length - 2];
+            var intersection = new int[2];
+            int k = 0;
+
+            for (int i = 0; i < first.Length; i++)
+            {
+                for (int j = 0; j < second.Length; j++)
+                {
+                    if (first[i] == second[j])
+                    {
+                        intersection[k++] = first[i];
+                        break;
+                    }
+                }
+            }
+            return intersection;
+        }
+
+        // O(n) Time Complexety
+        public int[] IntersectionOnSorted(int[] first, int[] second)
+        {
+            // Common elemnts of both sets
+            //var intersection = new int[first.Length + second.Length - 2];
+            var intersection = new int[2];
+            int i = 0, j = 0, k = 0;
+
+            while(i < first.Length && k < second.Length)
+            {
+                if (first[i] == second[j])
+                {
+                    intersection[k++] = first[i];
+                    i++;
+                    j++;
+                }
+                else if (first[i] < second[j])
+                {
+                    i++;
+                }
+                else
+                {
+                    j++;
+                }
+
+            }
+            return intersection;
+        }
+
+        // O(n2) Time Complexety
+        public int[] Difference(int[] first, int[] second)
+        {
+            // A - B
+            // We want all elemnt of A that are not in B
+            //var difference = new int[first.Length + second.Length - 2];
+            var difference = new int[3];
+            int k = 0;
+
+            for (int i = 0; i < first.Length; i++)
+            {
+                var foundInSecond = false;
+                for (int j = 0; j < second.Length; j++)
+                {
+                    if (first[i] == second[j])
+                    {
+                        foundInSecond = true;
+                        break;
+                    }
+                }
+                if (!foundInSecond)
+                {
+                    difference[k++] = first[i];
+                }
+            }
+
+            return difference;
+        }
+
+        // O(n) Time Complexety
+        public int[] DifferenceOnSorted(int[] first, int[] second)
+        {
+            // A - B
+            // We want all elemnt of A that are not in B
+            //var difference = new int[first.Length + second.Length - 2];
+            var difference = new int[3];
+            int i = 0, j = 0, k = 0;
+
+            while(i < first.Length && j < second.Length)
+            {
+                if (first[i] == second[j])
+                {
+                    i++;
+                    j++;
+                } 
+                else if (first[i] < second[j])
+                {
+                    difference[k++] = first[i];
+                    i++;
+                }
+                else
+                {
+                    j++;
+                }
+            }
+
+            for (; i < first.Length; i++)
+            {
+                difference[k++] = first[i];
+            }
+
+            return difference;
+        }
+
+        public bool SetMembership(int[] array, int n)
+        {
+            // Verify wether elemnt belong to the set or not
+            // It is the same as searching
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == n)
+                    return true;
+            }
+            return false;
+        }
+
+        // n*(n+1)/2 this is the formula for sum of N natural numbers
+        public int[] FindMissingElement(int[] array)
+        {
+            var number = array.Length;
+            var low = array[0];
+            var high = array[number-1];
+            var difference = low - 0;
+            var missing = new int[high - low - number + 1];
+            int k = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                var actualDifference = array[i] - i;
+                if (difference != actualDifference)
+                {
+                    missing[k++] = i + difference;
+                    difference = actualDifference;
+                }
+            }
+
+            return missing;
+        }
+
+        public int[] FindMissingElementWhile(int[] array)
+        {
+            var number = array.Length;
+            var low = array[0];
+            var high = array[number - 1];
+            var difference = low - 0;
+            var missing = new int[high - low - number + 1];
+            int k = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                var actualDifference = array[i] - i;
+                if (difference != actualDifference)
+                {
+                    while(difference < array[i] - i)
+                    {
+                        missing[k++] = i + difference;
+                        difference++;
+                    }
+                }
+            }
+
+            return missing;
+        }
+
+        // Time complexity is O(n)
+        // Space complexity is O(n)
+        public int[] FindMissingElementExtraArray(int[] array)
+        {
+            var number = array.Length; // Number of elements
+            int low = int.MaxValue; // Lowest number in the input array
+            int high = int.MinValue; // // Highest number in the input array
+            for (int i = 0; i < array.Length; i++)
+            {
+                if(array[i] > high)
+                    high = array[i];
+
+                if (array[i] < low )
+                    low = array[i];
+            }
+
+            var hashValues = new int[high + 1];
+            var missing = new int[high - low - number + 1];
+            int k = 0;
+
+            for (int i = 0; i < number; i++)
+            {
+                hashValues[array[i]]++;
+            }
+
+            for (int i = low; i <= high; i++)
+            {
+                if (hashValues[i] == 0)
+                {
+                    missing[k++] = i;
+                }
+            }
+
+            return missing;
+        }
     }
 }
