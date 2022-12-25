@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace DSAClassLibrary.Array
+﻿namespace DSAClassLibrary.Array
 {
     public class ArrayADT
     {
@@ -13,7 +9,7 @@ namespace DSAClassLibrary.Array
         }
         public void Insert(int[] array, int x, int index)
         {
-            if(index > 0 && index < array.Length)
+            if (index > 0 && index < array.Length)
             {
                 for (int i = array.Length; i > index; i--)
                 {
@@ -42,7 +38,7 @@ namespace DSAClassLibrary.Array
         }
         public int LinearSearch(int[] array, int x)
         {
-            for(int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == x)
                     return i;
@@ -55,10 +51,10 @@ namespace DSAClassLibrary.Array
             {
                 if (array[i] == x)
                 {
-                    if(i > 0)
+                    if (i > 0)
                     {
                         swap(array, i, i - 1);
-                        return i-1;
+                        return i - 1;
                     }
                     return i;
                 }
@@ -80,7 +76,7 @@ namespace DSAClassLibrary.Array
         public int BinarySearch(int[] array, int x)
         {
             int left = 0, right = array.Length - 1;
-            while(left <= right)
+            while (left <= right)
             {
                 var mid = (left + right) / 2;
                 if (array[mid] == x)
@@ -90,7 +86,8 @@ namespace DSAClassLibrary.Array
                 else if (array[mid] > x)
                 {
                     right = mid - 1;
-                } else
+                }
+                else
                 {
                     left = mid + 1;
                 }
@@ -99,19 +96,21 @@ namespace DSAClassLibrary.Array
         }
         public int BinarySearchRecursive(int[] array, int x, int left, int right)
         {
-            while(left <= right)
+            while (left <= right)
             {
                 var mid = (left + right) / 2;
                 if (array[mid] == x)
                 {
                     return mid;
-                } else if (array[mid] < x)
+                }
+                else if (array[mid] < x)
                 {
-                    left= mid + 1;
+                    left = mid + 1;
                     return BinarySearchRecursive(array, x, left, right);
-                } else
+                }
+                else
                 {
-                    right= mid - 1;
+                    right = mid - 1;
                     return BinarySearchRecursive(array, x, left, right);
                 }
             }
@@ -119,7 +118,7 @@ namespace DSAClassLibrary.Array
         }
         public int Get(int[] array, int index)
         {
-            if(index >= 0 && index < array.Length)
+            if (index >= 0 && index < array.Length)
             {
                 return array[index];
             }
@@ -194,11 +193,11 @@ namespace DSAClassLibrary.Array
                 }
             }
 
-            return max/array.Length;
+            return max / array.Length;
         }
         public void Reverse(int[] array)
         {
-            int left = 0, right = array.Length-1;
+            int left = 0, right = array.Length - 1;
             while (left <= right)
             {
                 swap(array, left, right);
@@ -221,7 +220,7 @@ namespace DSAClassLibrary.Array
         }
         public void LeftShift(int[] array)
         {
-            for (int i = 0; i < array.Length-1; i++)
+            for (int i = 0; i < array.Length - 1; i++)
             {
                 array[i] = array[i + 1];
             }
@@ -239,7 +238,7 @@ namespace DSAClassLibrary.Array
         }
         public void RightShift(int[] array)
         {
-            for (int i = array.Length -1; i > 0; i--)
+            for (int i = array.Length - 1; i > 0; i--)
             {
                 array[i] = array[i - 1];
             }
@@ -257,11 +256,11 @@ namespace DSAClassLibrary.Array
         }
         public void InsertIntoSorted(int[] array, int x)
         {
-            for (int i = array.Length -1; i >= 0 ; i--)
+            for (int i = array.Length - 1; i >= 0; i--)
             {
                 if (array[i] > x)
                 {
-                    array[i+1] = array[i];
+                    array[i + 1] = array[i];
                 }
                 else
                 {
@@ -275,7 +274,7 @@ namespace DSAClassLibrary.Array
             var i = array.Length - 1;
             while (array[i] > x)
             {
-                array[i+ 1] = array[i];
+                array[i + 1] = array[i];
                 i--;
             }
         }
@@ -303,7 +302,7 @@ namespace DSAClassLibrary.Array
                 {
                     j--;
                 }
-                if(i < j)
+                if (i < j)
                 {
                     swap(array, i, j);
                 }
@@ -331,7 +330,7 @@ namespace DSAClassLibrary.Array
             var merged = new int[first.Length + second.Length];
             int i = 0, j = 0, z = 0;
 
-            while(i < first.Length && j < second.Length)
+            while (i < first.Length && j < second.Length)
             {
                 if (first[i] < second[j])
                 {
@@ -344,12 +343,12 @@ namespace DSAClassLibrary.Array
 
             }
 
-            for(; i < first.Length; i++)
+            for (; i < first.Length; i++)
             {
                 merged[z++] = first[i];
             }
 
-            for(; j < second.Length; j++)
+            for (; j < second.Length; j++)
             {
                 merged[z++] = second[j];
             }
@@ -384,7 +383,7 @@ namespace DSAClassLibrary.Array
                         break;
                     }
                 }
-                if(!isDuplicate)
+                if (!isDuplicate)
                 {
                     union[k++] = second[j];
                 }
@@ -399,7 +398,7 @@ namespace DSAClassLibrary.Array
             var union = new int[first.Length + second.Length - 2];
             int i = 0, j = 0, k = 0;
 
-            while(i < first.Length && j < second.Length)
+            while (i < first.Length && j < second.Length)
             {
                 if (first[i] == second[j])
                 {
@@ -419,12 +418,12 @@ namespace DSAClassLibrary.Array
                 }
             }
 
-            for(; i < first.Length; i++)
+            for (; i < first.Length; i++)
             {
                 union[k++] = first[i];
             }
 
-            for(; j < second.Length; j++)
+            for (; j < second.Length; j++)
             {
                 union[k++] = second[j];
             }
@@ -461,7 +460,7 @@ namespace DSAClassLibrary.Array
             var intersection = new int[2];
             int i = 0, j = 0, k = 0;
 
-            while(i < first.Length && k < second.Length)
+            while (i < first.Length && k < second.Length)
             {
                 if (first[i] == second[j])
                 {
@@ -520,13 +519,13 @@ namespace DSAClassLibrary.Array
             var difference = new int[3];
             int i = 0, j = 0, k = 0;
 
-            while(i < first.Length && j < second.Length)
+            while (i < first.Length && j < second.Length)
             {
                 if (first[i] == second[j])
                 {
                     i++;
                     j++;
-                } 
+                }
                 else if (first[i] < second[j])
                 {
                     difference[k++] = first[i];
@@ -563,7 +562,7 @@ namespace DSAClassLibrary.Array
         {
             var number = array.Length;
             var low = array[0];
-            var high = array[number-1];
+            var high = array[number - 1];
             var difference = low - 0;
             var missing = new int[high - low - number + 1];
             int k = 0;
@@ -571,10 +570,10 @@ namespace DSAClassLibrary.Array
             for (int i = 0; i < array.Length; i++)
             {
                 var actualDifference = array[i] - i;
-                if (difference != actualDifference)
+                while (difference != actualDifference)
                 {
                     missing[k++] = i + difference;
-                    difference = actualDifference;
+                    difference++;
                 }
             }
 
@@ -595,7 +594,7 @@ namespace DSAClassLibrary.Array
                 var actualDifference = array[i] - i;
                 if (difference != actualDifference)
                 {
-                    while(difference < array[i] - i)
+                    while (difference < array[i] - i)
                     {
                         missing[k++] = i + difference;
                         difference++;
@@ -615,10 +614,10 @@ namespace DSAClassLibrary.Array
             int high = int.MinValue; // // Highest number in the input array
             for (int i = 0; i < array.Length; i++)
             {
-                if(array[i] > high)
+                if (array[i] > high)
                     high = array[i];
 
-                if (array[i] < low )
+                if (array[i] < low)
                     low = array[i];
             }
 
@@ -646,7 +645,7 @@ namespace DSAClassLibrary.Array
         {
             var duplicates = new List<int>();
             var lastDuplicate = 0;
-            for(int i = 1; i < array.Length; i++)
+            for (int i = 1; i < array.Length; i++)
             {
                 if (array[i] == array[i - 1] && array[i] != lastDuplicate)
                 {
@@ -665,7 +664,7 @@ namespace DSAClassLibrary.Array
             {
                 if (array[i] == array[i + 1])
                 {
-                    j = i +1;
+                    j = i + 1;
                     while (array[i] == array[j])
                     {
                         j++;
@@ -716,11 +715,11 @@ namespace DSAClassLibrary.Array
                 if (duplicates.TryGetValue(array[i], out int duplicateKey))
                     continue;
 
-                for (int j = i+ 1; j < array.Length; j++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
                     if (array[i] == array[j])
                     {
-                        if(duplicates.TryGetValue(array[i], out int duplicate))
+                        if (duplicates.TryGetValue(array[i], out int duplicate))
                         {
                             duplicates[array[i]]++;
                         }
@@ -733,6 +732,39 @@ namespace DSAClassLibrary.Array
             }
 
             return duplicates;
+        }
+
+        public int[] FindPairWithSumKQuadratic(int[] array, int k)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = i+1; j < array.Length; j++)
+                {
+                    if (array[i] + array[j] == k)
+                    {
+                        return new int[] { array[i], array[j] };
+                    }
+                }
+            }
+            return new int[2] { -1, -1 };
+        }
+
+        public int[] FindPairWithSumK(int[] array, int k)
+        {
+            var dictionary = new Dictionary<int, int>();
+            for (int i = 0; i < array.Length; i++)
+            {
+                var diff = k - array[i];
+                if (dictionary.TryGetValue(diff, out int value))
+                {
+                    return new int[] { value, array[i] };
+                }
+                else
+                {
+                    dictionary[array[i]] = array[i];
+                }
+            }
+            return new int[2] { -1, -1 };
         }
     }
 }
