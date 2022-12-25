@@ -128,5 +128,65 @@ namespace DSAClassLibrary.Test.Array
             var actual = sut.FindMissingElementExtraArray(array);
             CollectionAssert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        [DataRow(new int[] {3,6,8,8,10,12,15,15,15,20}, new int[] {8, 15 })]
+        [DataRow(new int[] { 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 }, new int[] { 2, 3, 4 })]
+        public void FindDuplicatesInSortedArrayTest(int[] array, int[] expected)
+        {
+            var sut = new ArrayADT();
+            var actual = sut.FindDuplicatesInSortedArray(array);
+            
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void FindDuplicatesInSortedArrayWithCountTest()
+        {
+            var sut = new ArrayADT();
+            int[] array = new int[] { 3, 6, 8, 8, 10, 12, 15, 15, 15, 20 };
+            var expected = new Dictionary<int, int>
+            {
+                {8, 2},
+                {15, 3}
+            };
+            var actual = sut.FindDuplicatesInSortedArrayWithCount(array);
+
+            CollectionAssert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        public void FindDuplicatesInSortedArrayWithCountUsingHashingTest()
+        {
+            var sut = new ArrayADT();
+            int[] array = new int[] { 3, 6, 8, 8, 10, 12, 15, 15, 15, 20 };
+            var expected = new Dictionary<int, int>
+            {
+                {8, 2},
+                {15, 3}
+            };
+            var actual = sut.FindDuplicatesInSortedArrayWithCountUsingHashing(array);
+
+            CollectionAssert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        public void FindDuplicatesInUnSortedArrayTest()
+        {
+            var sut = new ArrayADT();
+            int[] array = new int[] { 8, 3, 6, 4, 6, 5, 6, 8, 2, 7 };
+            var expected = new Dictionary<int, int>
+            {
+                {8, 2},
+                {6, 3}
+            };
+            var actual = sut.FindDuplicatesInUnSortedArray(array);
+
+            CollectionAssert.AreEqual(expected, actual);
+
+        }
+
     }
 }

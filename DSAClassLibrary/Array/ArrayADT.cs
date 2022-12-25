@@ -6,14 +6,6 @@ namespace DSAClassLibrary.Array
 {
     public class ArrayADT
     {
-        public void Display(int[] array)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
-        }
-
         public void AddAppend(int[] array, int x)
         {
             //if(array.Size > length)
@@ -648,6 +640,99 @@ namespace DSAClassLibrary.Array
             }
 
             return missing;
+        }
+
+        public int[] FindDuplicatesInSortedArray(int[] array)
+        {
+            var duplicates = new List<int>();
+            var lastDuplicate = 0;
+            for(int i = 1; i < array.Length; i++)
+            {
+                if (array[i] == array[i - 1] && array[i] != lastDuplicate)
+                {
+                    lastDuplicate = array[i];
+                    duplicates.Add(array[i]);
+                }
+            }
+            return duplicates.ToArray();
+        }
+
+        public Dictionary<int, int> FindDuplicatesInSortedArrayWithCount(int[] array)
+        {
+            var duplicateCounts = new Dictionary<int, int>();
+            var j = 0;
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                if (array[i] == array[i + 1])
+                {
+                    j = i +1;
+                    while (array[i] == array[j])
+                    {
+                        j++;
+                    }
+                    duplicateCounts.Add(array[i], j - i);
+                    i = j - 1;
+                }
+            }
+
+            return duplicateCounts;
+        }
+
+        public Dictionary<int, int> FindDuplicatesInSortedArrayWithCountUsingHashing(int[] array)
+        {
+            var maxElement = int.MinValue;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > maxElement)
+                    maxElement = array[i];
+            }
+
+            var hashArray = new int[maxElement + 1];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                hashArray[array[i]]++;
+            }
+
+            var duplicateCounts = new Dictionary<int, int>();
+            for (int i = 0; i < hashArray.Length; i++)
+            {
+                if (hashArray[i] > 1)
+                {
+                    duplicateCounts.Add(i, hashArray[i]);
+                }
+            }
+
+            return duplicateCounts;
+        }
+
+        public Dictionary<int, int> FindDuplicatesInUnSortedArray(int[] array)
+        {
+            var duplicates = new Dictionary<int, int>();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (duplicates.TryGetValue(array[i], out int duplicateKey))
+                    continue;
+
+                for (int j = i+ 1; j < array.Length; j++)
+                {
+                    if (array[i] == array[j])
+                    {
+                        if(duplicates.TryGetValue(array[i], out int duplicate))
+                        {
+                            duplicates[array[i]]++;
+                        }
+                        else
+                        {
+                            duplicates[array[i]] = 2;
+                        }
+                    }
+                }
+            }
+
+            return duplicates;
         }
     }
 }
