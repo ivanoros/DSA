@@ -177,7 +177,7 @@ namespace DSAClassLibrary.Test.Array
         }
 
         [TestMethod]
-        [DataRow(new int[] {6,3,8,10,16,7,5,2,9,14}, 10, new int[] { 3,7})]
+        [DataRow(new int[] { 6, 3, 8, 10, 16, 7, 5, 2, 9, 14 }, 10, new int[] { 3, 7 })]
         public void FindPairWithSumKQuadraticTest(int[] array, int k, int[] expected)
         {
             var actual = _sut.FindPairWithSumKQuadratic(array, k);
@@ -190,6 +190,24 @@ namespace DSAClassLibrary.Test.Array
         public void FindPairWithSumKTest(int[] array, int k, int[] expected)
         {
             var actual = _sut.FindPairWithSumK(array, k);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(new int[] { 1, 3, 4, 5, 6, 8, 9, 10, 12, 14 }, 10, new int[] { 1, 9 })]
+        public void FindPairWithSumKInSortedArrayTest(int[] array, int k, int[] expected)
+        {
+            var actual = _sut.FindPairWithSumKInSortedArray(array, k);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(new int[] { 5, 8, 3, 9, 6, 2, 10, 7, -1, 4 }, new int[] { -1, 10 })]
+        public void FindMaxAndMinInSingleScanTest(int[] array, int[] expected)
+        {
+            var actual = _sut.FindMaxAndMinInSingleScan(array);
 
             CollectionAssert.AreEqual(expected, actual);
         }

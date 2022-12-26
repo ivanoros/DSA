@@ -738,7 +738,7 @@
         {
             for (int i = 0; i < array.Length; i++)
             {
-                for (int j = i+1; j < array.Length; j++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
                     if (array[i] + array[j] == k)
                     {
@@ -765,6 +765,35 @@
                 }
             }
             return new int[2] { -1, -1 };
+        }
+
+        public int[] FindPairWithSumKInSortedArray(int[] array, int k)
+        {
+            int i = 0, j = array.Length - 1;
+            while (i < j)
+            {
+                if (array[i] + array[j] == k)
+                    return new int[] { array[i], array[j] };
+                else if (array[i] + array[j] > k)
+                    j--;
+                else
+                    i++;
+            }
+            return new int[] { -1, -1 };
+        }
+
+        public int[] FindMaxAndMinInSingleScan(int[] array)
+        {
+            var min = array[0];
+            var max = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > max)
+                    max = array[i];
+                else if (array[i] < min)
+                    min = array[i];
+            }
+            return new int[] { min, max };
         }
     }
 }
