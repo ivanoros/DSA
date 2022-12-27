@@ -2,11 +2,6 @@
 {
     public class ArrayADT
     {
-        public void AddAppend(int[] array, int x)
-        {
-            //if(array.Size > length)
-            //array[length++] = x;
-        }
         public void Insert(int[] array, int x, int index)
         {
             if (index > 0 && index < array.Length)
