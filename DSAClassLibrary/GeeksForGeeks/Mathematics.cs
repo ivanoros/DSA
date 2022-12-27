@@ -68,5 +68,93 @@ namespace DSAClassLibrary.GeeksForGeeks
 
             return (reverse == original);
         }
+
+        public long Factorial(int n)
+        {
+            long factorial = 1;
+
+            for (int i = 2; i <= n; i++)
+            {
+                factorial*= i;
+            }
+
+            return factorial;
+        }
+
+        public int FactorialRecursive(int n)
+        {
+            if (n <= 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return FactorialRecursive(n - 1) * n;
+            }
+        }
+
+        public int GreatestCommonDivisor(int a, int b)
+        {
+            var result = Math.Min(a, b);
+            while (result > 0)
+            {
+                if(a % result == 0 && b%result == 0)
+                {
+                    break;
+                }
+                result--;
+            }
+            return result;
+        }
+
+        //  Euclidean Algorithm
+        //  gcd(a,b) = gcd(a-b, b)
+        public int GreatestCommonDivisorEuclidean(int a, int b)
+        {
+            while(a != b)
+            {
+                if(a > b)
+                {
+                    a = a - b;
+                }
+                else
+                {
+                    b = b - a;
+                }
+            }
+
+            return a;
+        }
+
+        public int GreatestCommonDivisorEuclideanOptimized(int a, int b)
+        {
+            if (b == 0)
+                return a;
+            else
+                return GreatestCommonDivisorEuclideanOptimized(b, a % b);
+        }
+
+        // The smallest number that is divisable by both numbers
+        public int LeastCommonMultiple(int a, int b)
+        {
+            var result = Math.Max(a, b);
+
+            while (true)
+            {
+                if(result % a == 0
+                    && result % b == 0)
+                {
+                    return result;
+                }
+
+                result++;
+            }
+        }
+
+        // a*b = gcd(a,b) * lcm(a,b)
+        public int LeastCommonMultipleEfficient(int a, int b)
+        {
+            return (a * b) / GreatestCommonDivisorEuclideanOptimized(a, b);
+        }
     }
 }

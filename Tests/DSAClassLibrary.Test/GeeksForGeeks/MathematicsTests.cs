@@ -1,4 +1,5 @@
 ﻿using DSAClassLibrary.GeeksForGeeks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,14 @@ namespace DSAClassLibrary.Test.GeeksForGeeks
     [TestClass]
     public class MathematicsTests
     {
+        private Mathematics _sut;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _sut = new Mathematics();
+        }
+
         [TestMethod]
         [DataRow(0,1)]
         [DataRow(1, 1)]
@@ -23,8 +32,7 @@ namespace DSAClassLibrary.Test.GeeksForGeeks
         [DataRow(7, 1)]
         public void NumberOfDigitsTest(int num, int expected)
         {
-            var sut = new Mathematics();
-            var actual = sut.NumberOfDigits(num);
+            var actual = _sut.NumberOfDigits(num);
             Assert.AreEqual(expected, actual);
         }
 
@@ -41,8 +49,7 @@ namespace DSAClassLibrary.Test.GeeksForGeeks
         [DataRow(7, 1)]
         public void NumberOfDigitsRecursiveTest(int num, int expected)
         {
-            var sut = new Mathematics();
-            var actual = sut.NumberOfDigitsRecursive(num);
+            var actual = _sut.NumberOfDigitsRecursive(num);
             Assert.AreEqual(expected, actual);
         }
 
@@ -59,8 +66,7 @@ namespace DSAClassLibrary.Test.GeeksForGeeks
         [DataRow(7, 1)]
         public void NumberOfDigitsLogarithmicTest(int num, int expected)
         {
-            var sut = new Mathematics();
-            var actual = sut.NumberOfDigitsLogarithmic(num);
+            var actual = _sut.NumberOfDigitsLogarithmic(num);
             Assert.AreEqual(expected, actual);
         }
 
@@ -72,9 +78,92 @@ namespace DSAClassLibrary.Test.GeeksForGeeks
         [DataRow(367, false)]
         public void IsPalindromTest(int num, bool expectes)
         {
-            var sut = new Mathematics();
-            var actual = sut.IsPalindrom(num);
+            var actual = _sut.IsPalindrom(num);
             Assert.AreEqual(expectes, actual);
+        }
+
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(1, 1)]
+        [DataRow(2, 2)]
+        [DataRow(3, 6)]
+        [DataRow(4, 24)]
+        [DataRow(5, 120)]
+        public void FactorialTest(int num, int expected)
+        {
+            var actual = _sut.Factorial(num);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(0, 1)]
+        [DataRow(1, 1)]
+        [DataRow(2, 2)]
+        [DataRow(3, 6)]
+        [DataRow(4, 24)]
+        [DataRow(5, 120)]
+        public void FactorialRecursiveTest(int num, int expected)
+        {
+            var actual = _sut.FactorialRecursive(num);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(4, 6, 2)]
+        [DataRow(100, 200, 100)]
+        [DataRow(7, 13, 1)]
+        [DataRow(12, 15, 3)]
+        [DataRow(10, 15, 5)]
+        public void GreatestCommonDivisorTest(int a, int b, int expected)
+        {
+            var actual = _sut.GreatestCommonDivisor(a, b);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(4, 6, 2)]
+        [DataRow(100, 200, 100)]
+        [DataRow(7, 13, 1)]
+        [DataRow(12, 15, 3)]
+        [DataRow(10, 15, 5)]
+        public void GreatestCommonDivisorEuclideanTest(int a, int b, int expected)
+        {
+            var actual = _sut.GreatestCommonDivisorEuclidean(a, b);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(4, 6, 2)]
+        [DataRow(100, 200, 100)]
+        [DataRow(7, 13, 1)]
+        [DataRow(12, 15, 3)]
+        [DataRow(10, 15, 5)]
+        public void GreatestCommonDivisorEuclideanOptimizedTest(int a, int b, int expected)
+        {
+            var actual = _sut.GreatestCommonDivisorEuclideanOptimized(a, b);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(4, 6, 12)]
+        [DataRow(12, 15, 60)]
+        [DataRow(2, 8, 8)]
+        [DataRow(3, 7, 21)]
+        public void LeastCommonMultipleTest(int a, int b, int expected)
+        {
+            var actual = _sut.LeastCommonMultiple(a, b);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(4, 6, 12)]
+        [DataRow(12, 15, 60)]
+        [DataRow(2, 8, 8)]
+        [DataRow(3, 7, 21)]
+        public void LeastCommonMultipleEfficientTest(int a, int b, int expected)
+        {
+            var actual = _sut.LeastCommonMultipleEfficient(a, b);
+            Assert.AreEqual(expected, actual);
         }
     }
 }
