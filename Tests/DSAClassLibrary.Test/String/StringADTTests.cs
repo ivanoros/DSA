@@ -60,5 +60,22 @@ namespace DSAClassLibrary.Test.String
             var actual = _sut.FindDuplicatesHashTable(str);
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        [DataRow("finding", "in")]
+        public void FindDuplicatesBitsTest(string str, string expected)
+        {
+            var actual = _sut.FindDuplicatesBits(str);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow("decimal", "medical", true)]
+        [DataRow("verbose", "observe", true)]
+        public void AreTwoStringsAnagramTest(string A, string B, bool expected)
+        {
+            var actual = _sut.AreTwoStringsAnagram(A, B);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

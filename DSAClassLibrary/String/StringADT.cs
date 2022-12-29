@@ -93,8 +93,53 @@ namespace DSAClassLibrary.String
         //  Bits ANDing (Masking)
         public string FindDuplicatesBits(string str)
         {
-            return str;
+            var duplicates = string.Empty;
+            var H = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                var X = 1;
+                X = X << str[i] - 97;
+                if( (X & H) > 0)
+                {
+                    duplicates = duplicates + str[i];
+                }
+                else
+                {
+                    H = X | H;
+                }
+            }
+
+            return duplicates;
         }
 
+        public bool AreTwoStringsAnagram(string A, string B)
+        {
+            if(A.Length != B.Length) return false;
+
+            var cache = new int[26];
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                cache[A[i] - 97]++;
+            }
+
+            for (int i = 0; i < B.Length; i++)
+            {
+                cache[B[i] - 97]--;
+                //if(cache[B[i] - 97] < 0)
+                //    return false;
+            }
+
+            for (int i = 0; i < cache.Length; i++)
+            {
+                if (cache[i] != 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
     }
 }

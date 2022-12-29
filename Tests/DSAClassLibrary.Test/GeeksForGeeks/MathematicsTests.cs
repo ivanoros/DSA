@@ -165,5 +165,44 @@ namespace DSAClassLibrary.Test.GeeksForGeeks
             var actual = _sut.LeastCommonMultipleEfficient(a, b);
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        [DataRow(13, true)]
+        [DataRow(14, false)]
+        [DataRow(101, true)]
+        public void IsPrimeNumberTest(int n, bool expected)
+        {
+            var actual = _sut.IsPrimeNumber(n);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(13, true)]
+        [DataRow(14, false)]
+        [DataRow(101, true)]
+        public void IsPrimeNumberEfficientTest(int n, bool expected)
+        {
+            var actual = _sut.IsPrimeNumberEfficient(n);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        [DataRow(13, true)]
+        [DataRow(14, false)]
+        [DataRow(101, true)]
+        public void IsPrimeNumberMoreEfficientTest(int n, bool expected)
+        {
+            var actual = _sut.IsPrimeNumberMoreEfficient(n);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow(12, new int[] {2, 2, 3})]
+        [DataRow(13, new int[] { 13 })]
+        [DataRow(315, new int[] { 3, 5, 7 })]
+        public void PrimeFactorsTest(int n, int[] expected)
+        {
+            var actual = _sut.PrimeFactors(n);
+            CollectionAssert.AreEqual(expected, actual);
+        }
     }
 }
